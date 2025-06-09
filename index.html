@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel of Names</title>
+    <style>
+        canvas {
+            border: 2px solid #000;
+        }
+        .main div{
+            float: left;
+            margin-left: 20px;
+        }
+        #namesListInput {
+            width: 200px;
+            height: 200px;
+        }
+        /* Modal styles */
+        #customModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+        }
+        #customModal .modal-content {
+            background: #fff;
+            margin: 15% auto;
+            padding: 30px 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        #customModal .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #888;
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div class="main">
+        <div>
+            <canvas id="wheelCanvas" width="800" height="800"></canvas>
+        </div>
+        
+        <div id="namesContainer">
+            <textarea id="namesListInput" ></textarea><br />
+            <button id="spinButton" onclick="spinWheel()">Spin</button>
+        </div>
+    </div>
+    <script src="js/main.js" ></script>
+    <div id="customModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalMessage"></div>
+        </div>
+    </div>
+</body>
+</html>
