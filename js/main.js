@@ -75,7 +75,8 @@
             } else {
                 inputDisabled(false);
                 const selectedIndex = Math.floor((((3.5-(rotation/Math.PI)%2)%2)/2)*numberOfSlices);
-                alert(`Selected: ${names[selectedIndex]}`);
+                document.getElementById('winnerName').innerText = names[selectedIndex];
+                MicroModal.show('modal-1');
             }
         };
         spin();
@@ -153,10 +154,17 @@
     namesListInput.value = names.join('\n')
 
     window.onload=function(){
+        // MicroModal.init({
+        //     target: 'modal-1',
+        //     disableScroll: true,
+        //     disableFocus: true,
+        //     openTrigger: 'data-micromodal-trigger',
+        //     closeTrigger: 'data-micromodal-close',
+        //     awaitOpenAnimation: false,
+        //     awaitCloseAnimation: false,
+        //     debugMode: false
+        // });
         drawTriangle();
         drawWheel();
     };
-
-    window.draw = drawWheel;
-    window.rotation = function(r){rotation += r * Math.PI;drawWheel();};
 })();

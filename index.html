@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wheel of Names</title>
-    <style>
-        canvas {
-            border: 2px solid #000;
-        }
-        .main div{
-            float: left;
-            margin-left: 20px;
-        }
-        #namesListInput {
-            width: 200px;
-            height: 200px;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/modal.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 </head>
+
 <body>
     <div class="main">
         <div>
             <canvas id="wheelCanvas" width="800" height="800"></canvas>
         </div>
-        
+
         <div id="namesContainer">
-            <textarea id="namesListInput" ></textarea><br />
+            <textarea id="namesListInput"></textarea><br />
             <button id="spinButton" onclick="spinWheel()">Spin</button>
         </div>
     </div>
-    <script src="js/main.js" ></script>
+    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header">
+                    <h2 class="modal__title" id="modal-1-title">
+                        Winner
+                    </h2>
+                </header>
+                <main class="modal__content" id="modal-1-content">
+                    <p id="winnerName" class="modal__text">
+                    </p>
+                </main>
+                <footer class="modal__footer">
+                    <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
 </body>
+
 </html>
