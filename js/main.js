@@ -8,9 +8,11 @@
     let rotation = 0;
 
     const canvas = document.getElementById('wheelCanvas');
+    const resultCanvas = document.getElementById('resultCanvas');
     const ctx = canvas.getContext('2d');
     const colors = ['#dd6e42', '#E8DAB2', '#4F6D7A', '#C0D6DF', '#EAEAEA', '#57240F', '#E8DAB2', '#D9C281', '#C1D0D7'];
     const spinButton = document.getElementById('spinButton');
+    const copyCloseBtn = document.getElementById('copyCloseBtn');
     const namesListInput = document.getElementById("namesListInput");
     spinButton.onclick = spinWheel;
     let timeoutId;
@@ -60,6 +62,50 @@
         ctx.stroke();
     }
 
+    function fillResultCanvas(name ){
+        var ctx = resultCanvas.getContext('2d');
+        ctx.clearRect(0, 0, resultCanvas.width, resultCanvas.height);
+        
+
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, resultCanvas.width, resultCanvas.height);
+        ctx.restore();
+
+        ctx.fillStyle = 'black';
+        ctx.setLineDash([5, 5]);
+        ctx.lineWidth = 3;
+        ctx.strokeRect(0, 0, resultCanvas.width, resultCanvas.height);
+
+        // Set the font size and style
+        
+        // Set the fill color for the text
+        ctx.font = '25px Arial';
+        ctx.fillStyle = '#00449e';
+        
+        // Write text on the canvas
+        ctx.fillText('Winner', 30, 25);
+        ctx.font = '30px Arial';
+        ctx.fillStyle = 'black';
+        ctx.fillText(`${name}`, 30, 60);
+    }
+
+    async function copyCanvasToClipboard() {
+            
+            try {
+                // Convert canvas to blob
+                resultCanvas.toBlob(async function(blob) {
+                    if (!blob) return;
+                    // Create clipboard item
+                    const item = new ClipboardItem({ 'image/png': blob });
+                    await navigator.clipboard.write([item]);
+                }, 'image/png');
+            } catch (err) {
+                alert('Failed to copy: ' + err);
+            }
+        }
+
     function spinWheel() {
         const spinDuration = 3000+Math.random()*5000; // spin for 3 seconds
         // const spinDuration = 1500; // spin for 3 seconds
@@ -76,6 +122,8 @@
                 inputDisabled(false);
                 const selectedIndex = Math.floor((((3.5-(rotation/Math.PI)%2)%2)/2)*numberOfSlices);
                 document.getElementById('winnerName').innerText = names[selectedIndex];
+                fillResultCanvas(names[selectedIndex]);
+                console.log(`Winner: ${names[selectedIndex]}`);
                 MicroModal.show('modal-1');
             }
         };
@@ -166,5 +214,12 @@
         // });
         drawTriangle();
         drawWheel();
+        copyCloseBtn.onclick = function() {
+            copyCanvasToClipboard().then(() => {
+                MicroModal.close('modal-1');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
     };
 })();
