@@ -12,11 +12,9 @@
     const ctx = canvas.getContext('2d');
     const colors = ['#dd6e42', '#E8DAB2', '#4F6D7A', '#C0D6DF', '#EAEAEA', '#57240F', '#E8DAB2', '#D9C281', '#C1D0D7'];
     const spinButton = document.getElementById('spinButton');
-    const shuffleButton = document.getElementById('shuffleBtn');
     const copyCloseBtn = document.getElementById('copyCloseBtn');
     const namesListInput = document.getElementById("namesListInput");
     spinButton.onclick = spinWheel;
-    shuffleButton.onclick = shuffleNames;
     let timeoutId;
 
     function drawWheel() {
@@ -51,11 +49,6 @@
             // ctx.fillText([rotation/Math.PI, Math.floor((((3.5-(rotation/Math.PI)%2)%2)/2)*numberOfSlices)], canvas.width - 80, 50);
             ctx.restore();
         }
-    }
-
-    function shuffleNames(){
-        names.map(item=>{return {n:item,v:Math.random()}}).sort((a,b)=>a.v-b.v).map(item=>item.n);
-        updateNamedependantValues();
     }
 
     function drawTriangle(){
@@ -131,7 +124,7 @@
                 document.getElementById('winnerName').innerText = names[selectedIndex];
                 fillResultCanvas(names[selectedIndex]);
                 console.log(`Winner: ${names[selectedIndex]}`);
-                MicroModal.show('modal-1');f
+                MicroModal.show('modal-1');
             }
         };
         spin();
