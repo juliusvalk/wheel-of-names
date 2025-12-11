@@ -16,7 +16,7 @@
     const copyCloseBtn = document.getElementById('copyCloseBtn');
     const namesListInput = document.getElementById("namesListInput");
     spinButton.onclick = spinWheel;
-    shuffleButton.onclick = shuffleNames();
+    shuffleButton.onclick = shuffleNames;
     let timeoutId;
 
     function drawWheel() {
